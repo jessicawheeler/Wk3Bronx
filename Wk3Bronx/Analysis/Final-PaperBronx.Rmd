@@ -1,0 +1,37 @@
+---
+title: "BronxHousingData"
+author: "Chris Woodard, Nathan Mowat, Saloman Gilles, Jessica Wheeler"
+date: "June 1, 2016"
+output: 
+  html_document:
+    keep_md: true
+---
+
+<br>
+
+>We used the [Rolling Housing Sales for NYC](http://www1.nyc.gov/home/search/index.page?search-terms=Rolling+sales+update) website and looked at the Bronx dataset for analysis.
+
+* The first steps towards analysis are loading the datafile and then cleaning the datafile.  Once the data is cleaned, we were able to analyze some data on housing trends in the Bronx.
+
+###Getting Started - Loading the datafile:
+```{r, code=readLines("/Users/JessicaSibal/Dropbox/Draft - Analysis/LoadDataFile.R"),  echo=FALSE, eval=TRUE}
+```
+
+### Creating main dataset
+```{r, dataLoader}
+```
+
+###Getting Started - Loading the datafile:
+```{r, code=readLines("/Users/JessicaSibal/Dropbox/Draft - Analysis/CleanDataFile.R"),  echo=FALSE, eval=TRUE}
+```
+###Cleaning the Bronx datafile:
+```{r, dataCleaner}
+```
+
+###Analyse the datafile:
+```{r, code=readLines("/Users/JessicaSibal/Dropbox/Draft - Analysis/Analysis.R"),  echo=FALSE, eval=TRUE}
+```
+
+###Bronx Data Analysis:
+```{r, dataAnalyser}
+```
