@@ -1,0 +1,78 @@
+---
+title: "BronxHousingData"
+author: "Chris Woodard, Nathan Mowat, Saloman Gilles, Jessica Wheeler"
+date: "June 1, 2016"
+output: 
+  html_document:
+    keep_md: true
+---
+
+<br>
+
+>We used the [Rolling Housing Sales for NYC](http://www1.nyc.gov/home/search/index.page?search-terms=Rolling+sales+update) website and looked at the Bronx dataset for analysis.
+
+* The first steps towards analysis are loading the datafile and then cleaning the datafile.  Once the data is cleaned, we were able to analyze some data on housing trends in the Bronx.
+
+###Getting Started - Loading the datafile:
+
+```{r, code=readLines ("LoadDataFile.R"), echo=TRUE, eval=FALSE}
+```
+
+
+###Cleaning the Bronx datafile:
+```{r, code=readLines ("CleanDataFile.R"), echo=TRUE, eval=FALSE}
+```
+
+###Bronx Data Analysis:
+```{r, code=readLines ("Analysis.R"), echo=TRUE, eval=FALSE}
+```
+
+```{r analysis with results, echo=FALSE}
+
+library(plyr)
+library(gtools)
+library(gdata)
+
+workingDirectory <- getwd()
+bx <- read.csv("/Users/JessicaSibal/Dropbox/Wk3Bronx/Data/rollingsales_bronx.csv")
+
+# convert column names to lower case for ease of processing
+names(bx) <- tolower(names(bx))
+# ensure numeric - remove currency indicator
+bx$sale.price.n <- as.numeric(gsub("[^[:digit:]]","", bx$sale.price)) 
+# get rid of leading digits
+bx$gross.sqft <- as.numeric(gsub("[^[:digit:]]","", bx$gross.square.feet)) 
+# get rid of leading digits
+bx$land.sqft <- as.numeric(gsub("[^[:digit:]]","", bx$land.square.feet)) 
+# changes sale.date to date format in R
+bx$sale.date <- as.Date(bx$sale.date) 
+# changes variable to numeric from factor
+bx$year.built <- as.numeric(as.character(bx$year.built))  
+# dataset with cleaned sale price
+bx$cleanedsale  <- bx[is.numeric(bx$sale.price.n),]  
+
+# histogram of raw data don't say a lot but sort of right skewed
+hist(bx$sale.price.n) 
+hist(bx$sale.price.n[bx$sale.price.n>0]) 
+hist(bx$gross.sqft[bx$sale.price.n==0]) 
+
+# cleaned data don't say a thing eitherbut sort of right skewed
+hist(bx$cleanedsale$sale.price.n)
+hist(bx$cleanedsale$sale.price.n[bx$cleanedsale$sale.price.n>0]) 
+hist(bx$cleanedsale$gross.sqft[bx$cleanedsale$sale.price.n==0])
+
+# plotted cleaned sales gross.sqfoot/price show some suspected outliers
+plot(bx$cleanedsale$gross.sqft, bx$cleanedsale$sale.price.n)
+
+# plot of Log-transforms of gross.sqft and sale.price.n looks good
+plot(log(bx.homes$gross.sqft),log(bx.homes$sale.price.n)) 
+# Summary of sale.price.n below $100,000
+summary(bx.homes[which(bx.homes$sale.price.n<100000),]) 
+
+# outliers
+#Removed the log data that was less than 5
+bx.homes$outliers <- (log(bx.homes$sale.price.n) <= 5) + 0 
+bx.homes <- bx.homes[which(bx.homes$outliers == 0),] 
+#ScatterPlot of Log gross.sqft vs sale.price.n with outliers removed
+plot(log(bx.homes$gross.sqft),log(bx.homes$sale.price.n)) 
+```
