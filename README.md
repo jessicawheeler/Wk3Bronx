@@ -9,8 +9,8 @@ Subdirectories of Wk3Project: Data, Analysis, Paper, README.txt
 
 Subdirectories of Analysis: Analysis.R, CleanDataFile.R, LoadDataFile.R
 
-Subdirectories of Data: rollingsales_bronx.csv, rollingsales_bronx.xls
+Subdirectories of Data: ExampleGUIforfilingstructure.png, ProjectOutline6306Wk3.pdf, RScriptForProject-Copy.R, RollingSales_2.txt, Wk36306ProjectOutline.pdf, rollingsales_bronx.csv, rollingsales_bronx.xls
 
-Subdirectories of Paper:Final-PaperBronx.Rmd
+Subdirectories of Paper:Final-PaperBronx.Rmd, Final-PaperBronx.html, PaperBronx.Rmd, PaperBronx.html, PaperBronx.md, Wk3Bronx.Rproj
 
 Our Goal was to practice file management within a project and to see the relationship between sales price of a home and its gross square footage.
